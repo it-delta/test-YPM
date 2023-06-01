@@ -10,10 +10,9 @@ const StudentsDataComponent = () => {
   // const [legalguardiansData, setLegalguardiansData] = useState([]);
 
 
-  // 1. useCallback
-  const onStudentsPick = async (studentIds) => {
+  const onStudentsPick = async (studentIds) => { //maybe useCallback later...
     for (const studentId of studentIds) {
-      // 2. fix and optimize requests
+      // fix and optimize requests
       let studentData = studentsData.find(e => e.id === studentId); // check if studentData has been loaded
       if (!studentData) {
         studentData = await fetchStudentData(studentId);
@@ -25,6 +24,7 @@ const StudentsDataComponent = () => {
           fetchLegalguardianData(legalguardianId)
         ]);
 
+        // saving data in th student obj
         studentData.schoolData = schoolData;
         studentData.legalguardianData = legalguardianData; 
         setStudentsData([...studentsData, studentData]);
